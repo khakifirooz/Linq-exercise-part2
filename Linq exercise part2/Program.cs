@@ -15,24 +15,33 @@ List<Student> Students = new()
     new Student {Id = 108, Name = "Amir", Family ="Mohseni", Age = 52},
 };
 
-var query = Students.GroupBy(x => new { x.Age, x.Name }).OrderBy(x => x.Key.Age);
-foreach (var group in query)
+// chunk example 
+
+var numbers = new List<int>(Enumerable.Range(10, 53));
+
+var query = numbers.Chunk(10);
+foreach (var chunk in query)
 {
-    Console.WriteLine($"\n Age: {group.Key.Age}, Name: {group.Key.Name}");
-    foreach (var item in group)
+    foreach (var item in chunk)
     {
-        Console.WriteLine($"    Id: {item.Id}, Name: {item.Name}, Family: {item.Family}, Age: {item.Age}");
+        Console.Write(item + " ");
     }
+    Console.WriteLine();
 }
 
 
 
 
 
-
-
-
-
+//var query = Students.GroupBy(x => new { x.Age, x.Name }).OrderBy(x => x.Key.Age);
+//foreach (var group in query)
+//{
+//    Console.WriteLine($"\n Age: {group.Key.Age}, Name: {group.Key.Name}");
+//    foreach (var item in group)
+//    {
+//        Console.WriteLine($"    Id: {item.Id}, Name: {item.Name}, Family: {item.Family}, Age: {item.Age}");
+//    }
+//}
 
 
 //var query = Students.GroupBy(x => x.Age);
