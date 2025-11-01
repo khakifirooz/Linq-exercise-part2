@@ -12,8 +12,27 @@ List<Student> Students = new()
     new Student {Id = 105, Name = "Amir", Family ="Kochaki", Age = 22},
     new Student {Id = 106, Name = "Hosein", Family ="khaki", Age = 55},
     new Student {Id = 107, Name = "Kaml", Family ="Kamalii", Age = 52},
-    new Student {Id = 108, Name = "Afshin", Family ="Mohseni", Age = 52},
+    new Student {Id = 108, Name = "Amir", Family ="Mohseni", Age = 52},
 };
+
+var query = Students.GroupBy(x => new { x.Age, x.Name }).OrderBy(x => x.Key.Age);
+foreach (var group in query)
+{
+    Console.WriteLine($"\n Age: {group.Key.Age}, Name: {group.Key.Name}");
+    foreach (var item in group)
+    {
+        Console.WriteLine($"    Id: {item.Id}, Name: {item.Name}, Family: {item.Family}, Age: {item.Age}");
+    }
+}
+
+
+
+
+
+
+
+
+
 
 
 //var query = Students.GroupBy(x => x.Age);
@@ -26,25 +45,25 @@ List<Student> Students = new()
 //    }
 //}
 
-var query = Students.ToLookup(x => x.Age)
-    .OrderByDescending(k => k.Key)
-    .Select(group => new
-    {
-        Key = group.Key,
-        Items = group.OrderBy(x => x.Family)
-    });
+//var query = Students.ToLookup(x => x.Age)
+//    .OrderByDescending(k => k.Key)
+//    .Select(group => new
+//    {
+//        Key = group.Key,
+//        Items = group.OrderBy(x => x.Family)
+//    });
 
-var student = new Student() {Id = 109, Name = "Mohsen", Family = "Kakifirooz", Age = 52};
-Students.Add(student);    //  because ToLookup is immediet execution
+//var student = new Student() {Id = 109, Name = "Mohsen", Family = "Kakifirooz", Age = 52};
+//Students.Add(student);    //  because ToLookup is immediet execution
 
-foreach (var group in query)
-{
-    Console.WriteLine($"\nkey: {group.Key} count: {group.Items.Count()}");
-    foreach (var item in group.Items)
-    {
-        Console.WriteLine($"    Id: {item.Id}, Name: {item.Name}, Family: {item.Family}, Age: {item.Age}");
-    }
-}
+//foreach (var group in query)
+//{
+//    Console.WriteLine($"\nkey: {group.Key} count: {group.Items.Count()}");
+//    foreach (var item in group.Items)
+//    {
+//        Console.WriteLine($"    Id: {item.Id}, Name: {item.Name}, Family: {item.Family}, Age: {item.Age}");
+//    }
+//}
 
 
 
