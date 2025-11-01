@@ -1,10 +1,12 @@
 ﻿// GroupBy and ToLookup
 
+using System.ComponentModel.DataAnnotations;
+
 List<Student> Students = new()
 {
     new Student {Id = 101, Name = "Mehrshad", Family ="Khakifirooz", Age = 21},
     new Student {Id = 102, Name = "Ali", Family ="Ghoreyshi", Age = 25},
-    new Student {Id = 103, Name = "Mehdi", Family ="Ahmadvand", Age = 19},
+    new Student {Id = 103, Name = "Mehdi", Family ="Ahmadvand", Age = 20},
     new Student {Id = 104, Name = "Ahmad", Family ="Heidari", Age = 20},
     new Student {Id = 105, Name = "Amir", Family ="Kochaki", Age = 22},
     new Student {Id = 106, Name = "Hosein", Family ="khaki", Age = 55},
@@ -16,12 +18,13 @@ List<Student> Students = new()
 var query = Students.GroupBy(x => x.Age);
 foreach (var group in query)
 {
-    Console.WriteLine($"key: {group.Key} count: {group.Count()}");
+    Console.WriteLine($"\nkey: {group.Key} count: {group.Count()}");
     foreach (var item in group)
     {
-        Console.WriteLine($"Id: {item.Id}, Name: {item.Name}");
+        Console.WriteLine($"    Id: {item.Id}, Name: {item.Name}, Family: {item.Family}, Age: {item.Age}");
     }
 }
+
 
 
 
