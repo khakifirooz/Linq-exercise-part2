@@ -1,6 +1,7 @@
 ﻿// GroupBy and ToLookup
 
 using System.ComponentModel.DataAnnotations;
+using System.Text.RegularExpressions;
 
 List<Student> Students = new()
 {
@@ -11,15 +12,31 @@ List<Student> Students = new()
     new Student {Id = 105, Name = "Amir", Family ="Kochaki", Age = 22},
     new Student {Id = 106, Name = "Hosein", Family ="khaki", Age = 55},
     new Student {Id = 107, Name = "Kaml", Family ="Kamalii", Age = 52},
-    new Student {Id = 108, Name = "Afshin", Family ="Mohseni", Age = 50},
+    new Student {Id = 108, Name = "Afshin", Family ="Mohseni", Age = 52},
 };
 
 
-var query = Students.GroupBy(x => x.Age);
+//var query = Students.GroupBy(x => x.Age);
+//foreach (var group in query)
+//{
+//    Console.WriteLine($"\nkey: {group.Key} count: {group.Count()}");
+//    foreach (var item in group)
+//    {
+//        Console.WriteLine($"    Id: {item.Id}, Name: {item.Name}, Family: {item.Family}, Age: {item.Age}");
+//    }
+//}
+
+var query = Students.GroupBy(x => x.Age)
+    .OrderByDescending(k => k.Key)
+    .Select(group => new
+    {
+        Key = group.Key,
+        Items = group.OrderBy(x => x.Family)
+    });
 foreach (var group in query)
 {
-    Console.WriteLine($"\nkey: {group.Key} count: {group.Count()}");
-    foreach (var item in group)
+    Console.WriteLine($"\nkey: {group.Key} count: {group.Items.Count()}");
+    foreach (var item in group.Items)
     {
         Console.WriteLine($"    Id: {item.Id}, Name: {item.Name}, Family: {item.Family}, Age: {item.Age}");
     }
