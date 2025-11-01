@@ -33,6 +33,10 @@ var query = Students.GroupBy(x => x.Age)
         Key = group.Key,
         Items = group.OrderBy(x => x.Family)
     });
+
+var student = new Student() {Id = 109, Name = "Mohsen", Family = "Kakifirooz", Age = 52};
+Students.Add(student);    //  because groupBy is defferd execution
+
 foreach (var group in query)
 {
     Console.WriteLine($"\nkey: {group.Key} count: {group.Items.Count()}");
