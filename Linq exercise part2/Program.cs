@@ -26,7 +26,7 @@ List<Student> Students = new()
 //    }
 //}
 
-var query = Students.GroupBy(x => x.Age)
+var query = Students.ToLookup(x => x.Age)
     .OrderByDescending(k => k.Key)
     .Select(group => new
     {
@@ -35,7 +35,7 @@ var query = Students.GroupBy(x => x.Age)
     });
 
 var student = new Student() {Id = 109, Name = "Mohsen", Family = "Kakifirooz", Age = 52};
-Students.Add(student);    //  because groupBy is defferd execution
+Students.Add(student);    //  because ToLookup is immediet execution
 
 foreach (var group in query)
 {
