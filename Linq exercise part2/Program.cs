@@ -11,11 +11,14 @@ List<int> numbers = new List<int> { 1, 2, 2, 2, 2, 5, 4, 5, 8 };
 
 List<string> names = new List<string> { "Mehrshad", "Ahmad", "Amir", "Mehdi", "Nima", "Reza", "Mohammad" };
 
-var query = numbers.Distinct();
+//var query = numbers.Distinct();
+
+var query = names.Distinct(StringComparer.OrdinalIgnoreCase);
 foreach (var item in query)
 {
-    Console.WriteLine("item");  // for not reaping the same numbers
+    Console.WriteLine(item);  // remove k sensivity cases 
 }
+Console.ReadKey();
 
 List<Student> Student = new List<Student>()
 {
