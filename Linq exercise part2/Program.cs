@@ -1,34 +1,73 @@
-﻿// GroupBy and ToLookup
-
+﻿
 using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
 
-List<Student> Students = new()
+
+
+// SET operators( Distinc , Exept , Intersect , Union , Contact )
+
+
+List<int> numbers = new List<int> { 1, 2, 2, 2, 2, 5, 4, 5, 8 };
+
+List<string> names = new List<string> { "Mehrshad", "Ahmad", "Amir", "Mehdi", "Nima", "Reza", "Mohammad" };
+
+var query = numbers.Distinct();
+foreach (var item in query)
 {
-    new Student {Id = 101, Name = "Mehrshad", Family ="Khakifirooz", Age = 21},
-    new Student {Id = 102, Name = "Ali", Family ="Ghoreyshi", Age = 25},
-    new Student {Id = 103, Name = "Mehdi", Family ="Ahmadvand", Age = 20},
-    new Student {Id = 104, Name = "Ahmad", Family ="Heidari", Age = 20},
-    new Student {Id = 105, Name = "Amir", Family ="Kochaki", Age = 22},
-    new Student {Id = 106, Name = "Hosein", Family ="khaki", Age = 55},
-    new Student {Id = 107, Name = "Kaml", Family ="Kamalii", Age = 52},
-    new Student {Id = 108, Name = "Amir", Family ="Mohseni", Age = 52},
+    Console.WriteLine("item");  // for not reaping the same numbers
+}
+
+List<Student> Student = new List<Student>()
+{
+    new Student(){Id = 1001, Name = "Ali", Family = "Abdi" },
+    new Student(){Id = 1001, Name = "Hosein", Family = "Abdi" },
+    new Student(){Id = 1001, Name = "Emad", Family = "Abdi" },
+    new Student(){Id = 1001, Name = "Mohsen", Family = "Abdi" },
 };
+
+
+
+
+
+
+public class Student
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public string Family { get; set; }
+}
+
+
+// GroupBy and ToLookup
+
+
+
+//List<Student> Students = new()
+//{
+//    new Student {Id = 101, Name = "Mehrshad", Family ="Khakifirooz", Age = 21},
+//    new Student {Id = 102, Name = "Ali", Family ="Ghoreyshi", Age = 25},
+//    new Student {Id = 103, Name = "Mehdi", Family ="Ahmadvand", Age = 20},
+//    new Student {Id = 104, Name = "Ahmad", Family ="Heidari", Age = 20},
+//    new Student {Id = 105, Name = "Amir", Family ="Kochaki", Age = 22},
+//    new Student {Id = 106, Name = "Hosein", Family ="khaki", Age = 55},
+//    new Student {Id = 107, Name = "Kaml", Family ="Kamalii", Age = 52},
+//    new Student {Id = 108, Name = "Amir", Family ="Mohseni", Age = 52},
+//};
+
 
 // chunk example 
 
-var numbers = new List<int>(Enumerable.Range(10, 53));
+//var numbers = new List<int>(Enumerable.Range(10, 53));
 
-var query = numbers.Chunk(10);
-foreach (var chunk in query)
-{
-    foreach (var item in chunk)
-    {
-        Console.Write(item + " ");
-    }
-    Console.WriteLine();
-}
-
+//var query = numbers.Chunk(10);
+//foreach (var chunk in query)
+//{
+//    foreach (var item in chunk)
+//    {
+//        Console.Write(item + " ");
+//    }
+//    Console.WriteLine();
+//}
 
 
 
@@ -78,10 +117,10 @@ foreach (var chunk in query)
 
 
 
-public class Student
-{
-    public int Id { get; set; }
-    public string Name { get; set; }
-    public string Family { get; set; }
-    public int Age { get; set; }
-}
+//public class Student
+//{
+//    public int Id { get; set; }
+//    public string Name { get; set; }
+//    public string Family { get; set; }
+//    public int Age { get; set; }
+//}
