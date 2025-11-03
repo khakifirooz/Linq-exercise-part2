@@ -1,5 +1,7 @@
 ﻿
+using System.Collections;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
 using System.Text.RegularExpressions;
 
 
@@ -13,24 +15,26 @@ List<string> names = new List<string> { "Mehrshad", "Ahmad", "Amir", "Mehdi", "N
 
 //var query = numbers.Distinct();
 
-var query = names.Distinct(StringComparer.OrdinalIgnoreCase);
-foreach (var item in query)
-{
-    Console.WriteLine(item);  // remove k sensivity cases 
-}
-Console.ReadKey();
+//var query = names.Distinct(StringComparer.OrdinalIgnoreCase);
+//foreach (var item in query)
+//{
+//    Console.WriteLine(item);  // remove k sensivity cases 
+//}
 
 List<Student> Student = new List<Student>()
 {
     new Student(){Id = 1001, Name = "Ali", Family = "Abdi" },
-    new Student(){Id = 1001, Name = "Hosein", Family = "Abdi" },
+    new Student(){Id = 1001, Name = "Emad", Family = "Abdi" },
     new Student(){Id = 1001, Name = "Emad", Family = "Abdi" },
     new Student(){Id = 1001, Name = "Mohsen", Family = "Abdi" },
 };
 
-
-
-
+var query = Student.Distinct(new CustomCompare());
+foreach (var item in query)
+{
+    Console.WriteLine(item.Name);
+}
+Console.ReadKey();
 
 
 public class Student
@@ -38,6 +42,24 @@ public class Student
     public int Id { get; set; }
     public string Name { get; set; }
     public string Family { get; set; }
+}
+
+public class CustomCompare : IEqualityComparer<Student>
+{
+    public bool Equals(Student? x, Student? y)
+    {
+        if(object.ReferenceEquals(x, y)) return true;
+        if(object.ReferenceEquals(x, null) || object.ReferenceEquals(y, null)) return false;
+        return x.Id ==y.Id && x.Name ==y.Name && x.Family ==y.Family;
+    }
+
+    public int GetHashCode([DisallowNull] Student obj)
+    {
+        if (obj == null) return 0;
+        int IdHashCode = obj.Id.GetHashCode();
+        int NameHashCode = obj.Name.GetHashCode();
+        return IdHashCode + NameHashCode;
+    }
 }
 
 
