@@ -4,14 +4,31 @@ using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.RegularExpressions;
 
-
-
 // SET operators( Distinc , Exept , Intersect , Union , Contact )
 
 
-List<int> numbers = new List<int> { 1, 2, 2, 2, 2, 5, 4, 5, 8 };
 
-List<string> names = new List<string> { "Mehrshad", "Ahmad", "Amir", "Mehdi", "Nima", "Reza", "Mohammad" };
+List<int> numbers1 = new List<int>() { 1, 2, 3, 4, 5, 6 };
+List<int> numbers2 = new List<int>() { 4,5,6,7,8,9 };
+
+List<string> names1 = new List<string>() { "Ali", "Mohammd", "Nima", "Reza", "Nasrin" };
+List<string> names2 = new List<string>() { "ali", "mohammd", "Nasrin" };
+
+// var query = numbers1.Except(numbers2); // 1,2,3 in output
+// var query = names1.Except(names2, StringComparer.OrdinalIgnoreCase);  // second argoman is for K sensity
+// var query =  names1.Intersect(names2); // 4,5,6
+
+var query = names1.Union(names2).Distinct(StringComparer.OrdinalIgnoreCase);
+foreach (var item in query)
+{
+    Console.WriteLine(item);
+}
+
+
+
+//List<int> numbers = new List<int> { 1, 2, 2, 2, 2, 5, 4, 5, 8 };
+
+//List<string> names = new List<string> { "Mehrshad", "Ahmad", "Amir", "Mehdi", "Nima", "Reza", "Mohammad" };
 
 //var query = numbers.Distinct();
 
@@ -21,46 +38,46 @@ List<string> names = new List<string> { "Mehrshad", "Ahmad", "Amir", "Mehdi", "N
 //    Console.WriteLine(item);  // remove k sensivity cases 
 //}
 
-List<Student> Student = new List<Student>()
-{
-    new Student(){Id = 1001, Name = "Ali", Family = "Abdi" },
-    new Student(){Id = 1001, Name = "Emad", Family = "Abdi" },
-    new Student(){Id = 1001, Name = "Emad", Family = "Abdi" },
-    new Student(){Id = 1001, Name = "Mohsen", Family = "Abdi" },
-};
+//List<Student> Student = new List<Student>()
+//{
+//    new Student(){Id = 1001, Name = "Ali", Family = "Abdi" },
+//    new Student(){Id = 1001, Name = "Emad", Family = "Abdi" },
+//    new Student(){Id = 1001, Name = "Emad", Family = "Abdi" },
+//    new Student(){Id = 1001, Name = "Mohsen", Family = "Abdi" },
+//};
 
-var query = Student.Distinct(new CustomCompare());
-foreach (var item in query)
-{
-    Console.WriteLine(item.Name);
-}
-Console.ReadKey();
+//var query = Student.Distinct(new CustomCompare());
+//foreach (var item in query)
+//{
+//    Console.WriteLine(item.Name);
+//}
+//Console.ReadKey();
 
 
-public class Student
-{
-    public int Id { get; set; }
-    public string Name { get; set; }
-    public string Family { get; set; }
-}
+//public class Student
+//{
+//    public int Id { get; set; }
+//    public string Name { get; set; }
+//    public string Family { get; set; }
+//}
 
-public class CustomCompare : IEqualityComparer<Student>
-{
-    public bool Equals(Student? x, Student? y)
-    {
-        if(object.ReferenceEquals(x, y)) return true;
-        if(object.ReferenceEquals(x, null) || object.ReferenceEquals(y, null)) return false;
-        return x.Id ==y.Id && x.Name ==y.Name && x.Family ==y.Family;
-    }
+//public class CustomCompare : IEqualityComparer<Student>
+//{
+//    public bool Equals(Student? x, Student? y)
+//    {
+//        if(object.ReferenceEquals(x, y)) return true;
+//        if(object.ReferenceEquals(x, null) || object.ReferenceEquals(y, null)) return false;
+//        return x.Id ==y.Id && x.Name ==y.Name && x.Family ==y.Family;
+//    }
 
-    public int GetHashCode([DisallowNull] Student obj)
-    {
-        if (obj == null) return 0;
-        int IdHashCode = obj.Id.GetHashCode();
-        int NameHashCode = obj.Name.GetHashCode();
-        return IdHashCode + NameHashCode;
-    }
-}
+//    public int GetHashCode([DisallowNull] Student obj)
+//    {
+//        if (obj == null) return 0;
+//        int IdHashCode = obj.Id.GetHashCode();
+//        int NameHashCode = obj.Name.GetHashCode();
+//        return IdHashCode + NameHashCode;
+//    }
+//}
 
 
 // GroupBy and ToLookup
