@@ -25,7 +25,12 @@ List<Student> Student = new List<Student>()
 //var result = Student.Count(x => x.Name == "Emad");
 /*var result = numbers.Aggregate((x,y) => x+y);  */// x = x+y
 //var result = names.Aggregate((x,y) => x + ", " + y);
-Console.WriteLine(result);
+//Console.WriteLine(result);
+
+//var query = numbers.All(x => x > 0); // true
+//var query = numbers.Any(x => x > 8); // true
+//var query = numbers.Contains(5);  // true 
+Console.WriteLine(query);
 
 
 
