@@ -2,27 +2,53 @@
 using System.Collections;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
 using System.Text.RegularExpressions;
+
+// Aggragation Functions (sum,min,mux,avrage,...)
+
+int[] numbers = { 1, 2, 3, 5, 4, 6, 7, 8, 9 };
+
+string[] names = { "Mehrshad", "Ahmad", "Amir", "Mehdi", "Nima", "Reza", "Mohammad" };
+
+List<Student> Student = new List<Student>()
+{
+    new Student(){Id = 1001, Name = "Ali", Family = "Abdi" },
+    new Student(){Id = 1002, Name = "Emad", Family = "Abdi" },
+    new Student(){Id = 1003, Name = "Emad", Family = "Abdi" },
+    new Student(){Id = 1004, Name = "Mohsen", Family = "Abdi" },
+};
+
+//var result = numbers.Sum();
+//Console.WriteLine(result);
+var result = Student.Where(x => x.Id > 1001).Sum(x => x.Id);
+Console.WriteLine(result);
+
+
+
+
+
+
+
 
 // SET operators( Distinc , Exept , Intersect , Union , Contact )
 
 
+//List<int> numbers1 = new List<int>() { 1, 2, 3, 4, 5, 6 };
+//List<int> numbers2 = new List<int>() { 4,5,6,7,8,9 };
 
-List<int> numbers1 = new List<int>() { 1, 2, 3, 4, 5, 6 };
-List<int> numbers2 = new List<int>() { 4,5,6,7,8,9 };
+//List<string> names1 = new List<string>() { "Ali", "Mohammd", "Nima", "Reza", "Nasrin" };
+//List<string> names2 = new List<string>() { "ali", "mohammd", "Nasrin" };
 
-List<string> names1 = new List<string>() { "Ali", "Mohammd", "Nima", "Reza", "Nasrin" };
-List<string> names2 = new List<string>() { "ali", "mohammd", "Nasrin" };
+//// var query = numbers1.Except(numbers2); // 1,2,3 in output
+//// var query = names1.Except(names2, StringComparer.OrdinalIgnoreCase);  // second argoman is for K sensity
+//// var query =  names1.Intersect(names2); // 4,5,6
 
-// var query = numbers1.Except(numbers2); // 1,2,3 in output
-// var query = names1.Except(names2, StringComparer.OrdinalIgnoreCase);  // second argoman is for K sensity
-// var query =  names1.Intersect(names2); // 4,5,6
-
-var query = names1.Union(names2).Distinct(StringComparer.OrdinalIgnoreCase);
-foreach (var item in query)
-{
-    Console.WriteLine(item);
-}
+//var query = names1.Union(names2).Distinct(StringComparer.OrdinalIgnoreCase);
+//foreach (var item in query)
+//{
+//    Console.WriteLine(item);
+//}
 
 
 
