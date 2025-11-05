@@ -21,8 +21,12 @@ List<Student> Student = new List<Student>()
 
 //var result = numbers.Sum();
 //Console.WriteLine(result);
-var result = Student.Where(x => x.Id > 1001).Sum(x => x.Id);
+//var result = Student.Where(x => x.Id > 1001).Sum(x => x.Id);
+//var result = Student.Count(x => x.Name == "Emad");
+/*var result = numbers.Aggregate((x,y) => x+y);  */// x = x+y
+//var result = names.Aggregate((x,y) => x + ", " + y);
 Console.WriteLine(result);
+
 
 
 
